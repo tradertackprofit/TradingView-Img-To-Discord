@@ -1,0 +1,1 @@
+# TradingView-Img-To-Discord
