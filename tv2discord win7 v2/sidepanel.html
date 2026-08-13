@@ -24,7 +24,8 @@
     </div>
     <div class="header-right">
       <button class="btn-popout" id="btnPopout" title="เปิดหน้าต่างแยก (Windowed Mode / Win 7)">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
           <polyline points="15 3 21 3 21 9"></polyline>
           <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -108,31 +109,7 @@
         </select>
       </div>
 
-      <!-- Sync Candle Close Toggle -->
-      <div class="form-group">
-        <label class="toggle-container" for="syncCandleClose">
-          <div class="toggle-info">
-            <span class="toggle-icon">🕯️</span>
-            <span class="toggle-title">รอจบแท่งเทียนก่อนส่ง</span>
-          </div>
-          <input type="checkbox" id="syncCandleClose" class="toggle-input" checked />
-          <span class="toggle-switch"></span>
-        </label>
-        <div class="form-hint">ส่งรูปภาพทันทีที่แท่งเทียนของรอบเวลานั้นปิดสมบูรณ์ (+3 วินาที)</div>
-      </div>
 
-      <!-- Only Market Open Toggle -->
-      <div class="form-group">
-        <label class="toggle-container" for="onlyMarketOpen">
-          <div class="toggle-info">
-            <span class="toggle-icon">🏛️</span>
-            <span class="toggle-title">ส่งเฉพาะตอนตลาดเปิดเท่านั้น</span>
-          </div>
-          <input type="checkbox" id="onlyMarketOpen" class="toggle-input" checked />
-          <span class="toggle-switch"></span>
-        </label>
-        <div class="form-hint">ข้ามการส่งเมื่อตลาดปิดอยู่ (เปิดใช้งานกับ Forex / หุ้น)</div>
-      </div>
 
       <!-- Amount TF -->
       <div class="form-group">
@@ -256,6 +233,33 @@
         </label>
         <input type="url" class="form-input" id="webhookUrl" placeholder="https://discord.com/api/webhooks/..."
           spellcheck="false" />
+      </div>
+
+      <!-- Toggle Options Row (Side by Side) -->
+      <div class="toggle-row">
+        <div class="form-group toggle-col">
+          <label class="toggle-container" for="syncCandleClose" title="ส่งรูปภาพทันทีที่แท่งเทียนของรอบเวลานั้นปิดสมบูรณ์ (+3 วินาที)">
+            <div class="toggle-info">
+              <span class="toggle-icon">🕯️</span>
+              <span class="toggle-title">รอจบแท่งเทียน</span>
+            </div>
+            <input type="checkbox" id="syncCandleClose" class="toggle-input" checked />
+            <span class="toggle-switch"></span>
+          </label>
+          <div class="form-hint">ส่งภาพเมื่อจบแท่ง (+3s)</div>
+        </div>
+
+        <div class="form-group toggle-col">
+          <label class="toggle-container" for="onlyMarketOpen" title="ข้ามการส่งเมื่อตลาดปิดอยู่ (เปิดใช้งานกับ Forex / หุ้น)">
+            <div class="toggle-info">
+              <span class="toggle-icon">🏛️</span>
+              <span class="toggle-title">ส่งเฉพาะตลาดเปิด</span>
+            </div>
+            <input type="checkbox" id="onlyMarketOpen" class="toggle-input" checked />
+            <span class="toggle-switch"></span>
+          </label>
+          <div class="form-hint">ข้ามการส่งเมื่อตลาดปิด</div>
+        </div>
       </div>
 
       <!-- Save/Cancel Buttons -->
