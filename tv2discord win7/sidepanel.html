@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tv2dis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <img src="icon.png" alt="tv2dis logo" class="logo-img" width="32" height="32" />
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">TradingView → Discord</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="btn-popout" id="btnPopout" title="เปิดหน้าต่างแยก (Windowed Mode / Win 7)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </button>
+      <div class="status-badge" id="statusBadge">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-text" id="statusText">Stopped</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Control Buttons -->
+    <section class="card control-card">
+      <h2 class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3" />
+        </svg>
+        Control
+      </h2>
+      <div class="control-buttons">
+        <button class="btn btn-play" id="btnPlay">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          <span>Play</span>
+        </button>
+        <button class="btn btn-test" id="btnTest">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+          </svg>
+          <span>Test</span>
+        </button>
+      </div>
+      <!-- Timer display -->
+      <div class="timer-display" id="timerDisplay" style="display:none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+        </svg>
+        <span id="timerText">ส่งรอบถัดไปใน --:--</span>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="card settings-card">
+      <h2 class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+        </svg>
+        Settings
+      </h2>
+
+      <!-- Time Send -->
+      <div class="form-group">
+        <label class="form-label" for="timeSend">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          ส่งทุกๆ
+        </label>
+        <select class="form-select" id="timeSend">
+          <option value="5">5 นาที</option>
+          <option value="15">15 นาที</option>
+          <option value="30" selected>30 นาที</option>
+          <option value="60">1 ชั่วโมง</option>
+          <option value="240">4 ชั่วโมง</option>
+          <option value="1440">1 วัน</option>
+        </select>
+      </div>
+
+      <!-- Amount TF -->
+      <div class="form-group">
+        <label class="form-label" for="amountTf">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+          </svg>
+          จำนวน TimeFrame
+        </label>
+        <select class="form-select" id="amountTf">
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+
+      <!-- TimeFrame Selectors -->
+      <div class="tf-container" id="tfContainer">
+        <div class="form-group tf-group" id="tfGroup1">
+          <label class="form-label tf-label" for="tf1">
+            <span class="tf-badge">TF1</span>
+          </label>
+          <select class="form-select tf-select" id="tf1">
+            <option value="1">1M</option>
+            <option value="5">5M</option>
+            <option value="15" selected>15M</option>
+            <option value="30">30M</option>
+            <option value="60">1H</option>
+            <option value="240">4H</option>
+            <option value="1D">1D</option>
+          </select>
+        </div>
+        <div class="form-group tf-group" id="tfGroup2" style="display:none;">
+          <label class="form-label tf-label" for="tf2">
+            <span class="tf-badge">TF2</span>
+          </label>
+          <select class="form-select tf-select" id="tf2">
+            <option value="1">1M</option>
+            <option value="5">5M</option>
+            <option value="15">15M</option>
+            <option value="30">30M</option>
+            <option value="60" selected>1H</option>
+            <option value="240">4H</option>
+            <option value="1D">1D</option>
+          </select>
+        </div>
+        <div class="form-group tf-group" id="tfGroup3" style="display:none;">
+          <label class="form-label tf-label" for="tf3">
+            <span class="tf-badge">TF3</span>
+          </label>
+          <select class="form-select tf-select" id="tf3">
+            <option value="1">1M</option>
+            <option value="5">5M</option>
+            <option value="15">15M</option>
+            <option value="30">30M</option>
+            <option value="60">1H</option>
+            <option value="240" selected>4H</option>
+            <option value="1D">1D</option>
+          </select>
+        </div>
+        <div class="form-group tf-group" id="tfGroup4" style="display:none;">
+          <label class="form-label tf-label" for="tf4">
+            <span class="tf-badge">TF4</span>
+          </label>
+          <select class="form-select tf-select" id="tf4">
+            <option value="1">1M</option>
+            <option value="5">5M</option>
+            <option value="15">15M</option>
+            <option value="30">30M</option>
+            <option value="60">1H</option>
+            <option value="240">4H</option>
+            <option value="1D" selected>1D</option>
+          </select>
+        </div>
+        <div class="form-group tf-group" id="tfGroup5" style="display:none;">
+          <label class="form-label tf-label" for="tf5">
+            <span class="tf-badge">TF5</span>
+          </label>
+          <select class="form-select tf-select" id="tf5">
+            <option value="1">1M</option>
+            <option value="5" selected>5M</option>
+            <option value="15">15M</option>
+            <option value="30">30M</option>
+            <option value="60">1H</option>
+            <option value="240">4H</option>
+            <option value="1D">1D</option>
+          </select>
+        </div>
+        <div class="form-group tf-group" id="tfGroup6" style="display:none;">
+          <label class="form-label tf-label" for="tf6">
+            <span class="tf-badge">TF6</span>
+          </label>
+          <select class="form-select tf-select" id="tf6">
+            <option value="1">1M</option>
+            <option value="5">5M</option>
+            <option value="15">15M</option>
+            <option value="30" selected>30M</option>
+            <option value="60">1H</option>
+            <option value="240">4H</option>
+            <option value="1D">1D</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Webhook URL -->
+      <div class="form-group">
+        <label class="form-label" for="webhookUrl">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+          </svg>
+          Discord Webhook URL
+        </label>
+        <input type="url" class="form-input" id="webhookUrl" placeholder="https://discord.com/api/webhooks/..."
+          spellcheck="false" />
+      </div>
+
+      <!-- Save/Cancel Buttons -->
+      <div class="form-actions">
+        <button class="btn btn-save" id="btnSave">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+            <polyline points="17 21 17 13 7 13 7 21" />
+            <polyline points="7 3 7 8 15 8" />
+          </svg>
+          บันทึก
+        </button>
+        <button class="btn btn-cancel" id="btnCancel">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+          ยกเลิก
+        </button>
+      </div>
+    </section>
+
+    <!-- Log -->
+    <section class="card log-card">
+      <h2 class="card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+          <line x1="16" y1="13" x2="8" y2="13" />
+          <line x1="16" y1="17" x2="8" y2="17" />
+          <polyline points="10 9 9 9 8 9" />
+        </svg>
+        Log
+      </h2>
+      <div class="log-container" id="logContainer">
+        <div class="log-empty">ยังไม่มีกิจกรรม</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="sidepanel.js"></script>
+</body>
+
+</html>
