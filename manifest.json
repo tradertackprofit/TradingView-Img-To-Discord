@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "tv2dis",
+  "version": "1.0.0",
+  "description": "Capture TradingView charts and send to Discord via Webhook",
+  "permissions": [
+    "sidePanel",
+    "activeTab",
+    "alarms",
+    "storage",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://*.tradingview.com/*",
+    "<all_urls>"
+  ],
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.tradingview.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "action": {
+    "default_title": "tv2dis — TradingView to Discord"
+  }
+}
